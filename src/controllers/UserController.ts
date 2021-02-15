@@ -15,8 +15,6 @@ class UserController {
   static async updateUser(req: Request, res: Response) {
     const { uuid } = req.params
     const { nickname, email, password } = req.body
-    console.log(password)
-
     const user = await User.findOne({ id: uuid })
     if (user) {
       user.nickname = nickname

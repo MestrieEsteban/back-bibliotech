@@ -30,7 +30,7 @@ export default class UserBooks extends BaseEntity {
 	@JoinTable()
 	books!: Books[]
 
-	@OneToOne(type => User)
+	@ManyToOne(type => User)
 	@JoinColumn()
 	user!: User
 

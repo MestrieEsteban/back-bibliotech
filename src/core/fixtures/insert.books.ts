@@ -12,18 +12,26 @@ const users = [
 	{
 		title: 'Title 1',
 		description: '111111111',
-		author: 'test',
+		author: 'Salut',
 		cover: 'test',
 		genre: 'test',
-		isbn: 'test',
+		isbn: 's8df8sd',
 	},
 	{
 		title: 'Title 2',
 		description: '2222222222',
-		author: 'test',
+		author: 'Esteban',
 		cover: 'test',
 		genre: 'test',
-		isbn: 'test',
+		isbn: '12456',
+	},
+	{
+		title: 'Title 3',
+		description: '33333',
+		author: 'Esteban',
+		cover: 'test',
+		genre: 'test',
+		isbn: '12456',
 	},
 ]
 

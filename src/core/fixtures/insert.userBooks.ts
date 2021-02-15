@@ -15,7 +15,7 @@ const users = [
 		author: 'test',
 		cover: 'test',
 		genre: 'test',
-		isbn: 'test',
+		isbn: true,
 	},
 	{
 		title: 'userBooks',
@@ -23,7 +23,15 @@ const users = [
 		author: 'test',
 		cover: 'test',
 		genre: 'test',
-		isbn: 'test',
+		isbn: true,
+	},
+	{
+		title: 'userBooks',
+		description: 'esteban9d4.em@gmail.com',
+		author: 'test',
+		cover: 'test',
+		genre: 'test',
+		isbn: false,
 	},
 ]
 
@@ -34,10 +42,10 @@ export async function addUserBooks(): Promise<never | void> {
 		const aa = await User.findOne({ email: u.description })
 		const bb = await Books.findOne({ id: "1" })
 		const cc = await Books.findOne({ id: "2" })
-		if (aa && bb&& cc) {
+		if (aa && bb && cc) {
 			user.books = [bb, cc]
 			user.user = aa
-			user.isBiblio = true
+			user.isBiblio = u.isbn
 		}
 		
 
