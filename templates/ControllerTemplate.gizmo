@@ -1,0 +1,11 @@
+import { Request, Response } from 'express'
+
+class {{ name }} {
+  static async myFunction(req: Request, res: Response) {
+   
+  }
+   
+ 
+}
+
+export default {{ name }}

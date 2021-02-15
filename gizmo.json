@@ -1,0 +1,8 @@
+{
+	"make:model":{
+		"required": ["Name"],
+		"template":"./templates/mytemplate.gizmo",
+		"path":"./src/core/models/",
+		"type":"ts"
+	}
+}
