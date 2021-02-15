@@ -19,7 +19,7 @@ class UsersBooksController {
 			}
 			const { uuid } = req.body
 
-			const user = await User.findOne({ where: { id: uuid } })
+			const user = await User.findOne({ where: { id: uuid } }) 
 
 			// const userBooks = await UserBooks.findOne({
 			// 	where: { isBiblio: true, user: user },
