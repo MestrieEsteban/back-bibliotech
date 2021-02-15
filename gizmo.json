@@ -1,8 +1,23 @@
-{
-	"make:model":{
-		"required": ["Name"],
-		"template":"./templates/mytemplate.gizmo",
-		"path":"./src/core/models/",
-		"type":"ts"
+[
+	{
+		"name": "model",
+		"type": "",
+		"required": [
+			"name"
+		],
+		"template": "./templates/ModelTemplate.gizmo",
+		"path": "./src/core/models/",
+		"ext": "ts",
+		"help": "Name is the name of Model and Entity"
+	},
+	{
+		"name": "ctrl",
+		"type": "",
+		"required": [
+			"name"
+		],
+		"template": "./templates/ControllerTemplate.gizmo",
+		"path": "./src/controllers/",
+		"ext": "ts"
 	}
-}
+]
