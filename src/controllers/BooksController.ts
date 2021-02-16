@@ -56,6 +56,8 @@ class BooksController {
 				return res.send(`Field${isPlural ? 's' : ''} [ ${missings.join(', ')} ] ${isPlural ? 'are' : 'is'} missing`)
 			}
 			const { isbn } = req.params
+			console.log(isbn);
+			
 			const books = await Books.find({ where: { isbn: isbn } })
 
 			if (books.length > 0) {
@@ -82,6 +84,7 @@ class BooksController {
 						await newBook.save()
 					} catch (error) {
 						console.log(error);
+						return res.send(error)
 					}
 					const books = await Books.find({ where: { isbn: isbn } })
 					return res.status(OK.status).json(successNoJson('books', books))
