@@ -23,13 +23,13 @@ class BooksController {
 		const fields: string[] = ['search']
 
 		try {
-			const missings = fields.filter((field: string) => !req.body[field])
+			const missings = fields.filter((field: string) => !req.params[field])
 
 			if (!isEmpty(missings)) {
 				const isPlural = missings.length > 1
 				return res.send(`Field${isPlural ? 's' : ''} [ ${missings.join(', ')} ] ${isPlural ? 'are' : 'is'} missing`)
 			}
-			const { search } = req.body
+			const { search } = req.params
 			const books = await Books.find({
 				where: [
 					{ title: Like(`%${search}%`) },
@@ -49,13 +49,13 @@ class BooksController {
 	static async getBookByIsbn(req: Request, res: Response) {
 		const fields: string[] = ['isbn']
 		try {
-			const missings = fields.filter((field: string) => !req.body[field])
+			const missings = fields.filter((field: string) => !req.params[field])
 
 			if (!isEmpty(missings)) {
 				const isPlural = missings.length > 1
 				return res.send(`Field${isPlural ? 's' : ''} [ ${missings.join(', ')} ] ${isPlural ? 'are' : 'is'} missing`)
 			}
-			const { isbn } = req.body
+			const { isbn } = req.params
 			const books = await Books.find({ where: { isbn: isbn } })
 
 			if (books.length > 0) {

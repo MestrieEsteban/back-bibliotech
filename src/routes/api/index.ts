@@ -28,8 +28,8 @@ api.post('/auth/signin', AuthController.signin)
 
 //Books
 api.get('/books', BooksController.getBooks)
-api.get('/books/title', BooksController.getBooksBy)
-api.get('/books/search', BooksController.getBookByIsbn)
+api.get('/books/by/:search', BooksController.getBooksBy)
+api.get('/books/search/:search', BooksController.getBookByIsbn)
 
 //User book
 api.get('/user/books/:uuid', UsersBooksController.getUserBooks)
