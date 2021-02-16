@@ -1,17 +1,17 @@
 import {
-	Entity,
-	PrimaryGeneratedColumn,
-	Column,
-	BaseEntity,
-	CreateDateColumn,
-	BeforeInsert,
-	BeforeUpdate,
-	ManyToOne,
-	OneToMany,
-	OneToOne,
-	JoinTable,
-	JoinColumn,
-	ManyToMany,
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  BaseEntity,
+  CreateDateColumn,
+  BeforeInsert,
+  BeforeUpdate,
+  ManyToOne,
+  OneToMany,
+  OneToOne,
+  JoinTable,
+  JoinColumn,
+  ManyToMany,
 } from 'typeorm'
 import bcrypt from 'bcryptjs'
 import Books from './Books'
@@ -19,22 +19,20 @@ import User from './User'
 
 @Entity()
 export default class UserBooks extends BaseEntity {
+  @PrimaryGeneratedColumn()
+  id!: string
 
-	@PrimaryGeneratedColumn()
-	id!: string
+  @Column({ nullable: true })
+  isBiblio!: boolean
 
-	@Column({ nullable: true })
-	isBiblio!: boolean
+  @ManyToMany(() => Books, (books) => books.books)
+  @JoinTable()
+  books!: Books[]
 
-	@ManyToMany(() => Books, books => books.books)
-	@JoinTable()
-	books!: Books[]
+  @ManyToOne((type) => User)
+  @JoinColumn()
+  user!: User
 
-	@ManyToOne(type => User)
-	@JoinColumn()
-	user!: User
-
-	@CreateDateColumn()
-	createdAt!: string
-
+  @CreateDateColumn()
+  createdAt!: string
 }

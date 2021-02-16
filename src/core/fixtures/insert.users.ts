@@ -3,8 +3,8 @@
  * This is a example if you want to automatically insert rows in your database
  */
 
-import { mlog } from "../libs/utils"
-import User from "../models/User"
+import { mlog } from '../libs/utils'
+import User from '../models/User'
 
 const users = [
   {
@@ -20,16 +20,16 @@ const users = [
 ]
 
 export async function addUser(): Promise<never | void> {
-    for (const u of users) {
-      const user = new User()
+  for (const u of users) {
+    const user = new User()
 
-      user.nickname = u.nickname
-      user.email = u.email
-      user.password = u.password
+    user.nickname = u.nickname
+    user.email = u.email
+    user.password = u.password
 
-      await user.save().then(() => {
-        mlog(`${u.nickname} inserted on database`, 'success')
-      })
-    }
+    await user.save().then(() => {
+      mlog(`${u.nickname} inserted on database`, 'success')
+    })
+  }
   return
 }
