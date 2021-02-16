@@ -47,7 +47,10 @@
   "dependencies": {
     "@sentry/node": "^6.1.0",
     "@sentry/tracing": "^6.1.0",
+    "@types/axios": "^0.14.0",
     "@types/cors": "^2.8.8",
+    "amazon-book-search-se": "^0.0.9",
+    "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",
     "chalk": "^4.1.0",
     "cors": "^2.8.5",

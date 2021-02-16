@@ -28,6 +28,7 @@ const main = async (): Promise<void> => {
     const server = new Server(host, parseInt(port, 10))
     await server.run()
   } catch (err) {
+    Sentry.captureException(err)
     mlog(err.message, 'error')
     process.exit(-1)
   }

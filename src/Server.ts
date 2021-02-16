@@ -10,6 +10,7 @@ import '@/core/middlewares/passport'
 import api from '@/routes/api'
 
 import cors from 'cors'
+import * as Sentry from '@sentry/node'
 
 export default class Server {
   private _host: string
@@ -27,6 +28,8 @@ export default class Server {
     try {
       await db.authenticate()
     } catch (err) {
+      Sentry.captureException(err)
+
       mlog(err.message, 'error')
       return
     }

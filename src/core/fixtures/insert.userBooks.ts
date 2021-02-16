@@ -36,21 +36,21 @@ const users = [
 ]
 
 export async function addUserBooks(): Promise<never | void> {
-  for (const u of users) {
-    const user = new UserBooks()
+  //   for (const u of users) {
+  //     const user = new UserBooks()
 
-    const aa = await User.findOne({ email: u.description })
-    const bb = await Books.findOne({ id: '1' })
-    const cc = await Books.findOne({ id: '2' })
-    if (aa && bb && cc) {
-      user.books = [bb, cc]
-      user.user = aa
-      user.isBiblio = u.isbn
-    }
+  //     const aa = await User.findOne({ email: u.description })
+  //     const bb = await Books.findOne({ id: '1' })
+  //     const cc = await Books.findOne({ id: '2' })
+  //     if (aa && bb && cc) {
+  //       user.books = [bb, cc]
+  //       user.user = aa
+  //       user.isBiblio = u.isbn
+  //     }
 
-    await user.save().then(async () => {
-      mlog(`${u.title} inserted on database`, 'success')
-    })
-  }
+  //     await user.save().then(async () => {
+  //       mlog(`${u.title} inserted on database`, 'success')
+  //     })
+  //   }
   return
 }

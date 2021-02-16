@@ -6,6 +6,7 @@ import jwt from 'jsonwebtoken'
 import User from '@/core/models/User'
 import passport from 'passport'
 import * as Sentry from '@sentry/node'
+import UserBooks from '@/core/models/UserBooks'
 
 class AuthController {
   static async signup(req: Request, res: Response): Promise<Response> {
@@ -32,12 +33,21 @@ class AuthController {
 
       await user.save()
 
+      const userBookTrue = new UserBooks()
+      userBookTrue.user = user
+      userBookTrue.isBiblio = true
+      await userBookTrue.save()
+
+      const userBookFalse = new UserBooks()
+      userBookFalse.user = user
+      userBookFalse.isBiblio = false
+      await userBookFalse.save()
+
       const payload = { id: user.id, nickname }
       const token = jwt.sign(payload, process.env.JWT_ENCRYPTION as string)
       return res.status(CREATED.status).json(success(user, { token }))
     } catch (errorMessage) {
       Sentry.captureException(errorMessage)
-
       return res.send(errorMessage)
     }
   }

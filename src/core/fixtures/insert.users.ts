@@ -5,6 +5,7 @@
 
 import { mlog } from '../libs/utils'
 import User from '../models/User'
+import UserBooks from '../models/UserBooks'
 
 const users = [
   {
@@ -30,6 +31,16 @@ export async function addUser(): Promise<never | void> {
     await user.save().then(() => {
       mlog(`${u.nickname} inserted on database`, 'success')
     })
+
+    const userBookTrue = new UserBooks()
+    userBookTrue.user = user
+    userBookTrue.isBiblio = true
+    await userBookTrue.save()
+
+    const userBookFalse = new UserBooks()
+    userBookFalse.user = user
+    userBookFalse.isBiblio = false
+    await userBookFalse.save()
   }
   return
 }

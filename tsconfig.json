@@ -5,11 +5,13 @@
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
     "lib": [
-      "esnext"
+      "esnext",
+	  "DOM"
     ],
     "allowJs": false,
     "noEmit": true,
     "strict": true,
+	
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "baseUrl": "src",

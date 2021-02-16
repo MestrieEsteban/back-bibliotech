@@ -20,18 +20,6 @@ class UsersBooksController {
 
       const user = await User.findOne({ where: { id: uuid } })
 
-      // const userBooks = await UserBooks.findOne({
-      // 	where: { isBiblio: true, user: user },
-      // 	relations: ["books"]
-      // })
-      // const bb = await Books.findOne({ id: "3" })
-
-      // if (userBooks && bb) {
-      // 	userBooks.books.push(bb)
-      // 	userBooks.save()
-      // }
-      // console.log(userBooks);
-
       const books = await UserBooks.find({
         where: { user: user },
         relations: ['books'],
@@ -52,25 +40,24 @@ class UsersBooksController {
         return res.send(`Field${isPlural ? 's' : ''} [ ${missings.join(', ')} ] ${isPlural ? 'are' : 'is'} missing`)
       }
       const { uuid, isbn, type } = req.body
+      const isBiblio = type == 'bibliotech' ? true : false
       const user = await User.findOne({ where: { id: uuid } })
-      const userBooks = await UserBooks.findOne({
-        where: { isBiblio: true, user: user },
-        relations: ['books'],
-      })
-      const bb = await Books.findOne({ isbn: isbn })
-
-      if (userBooks && bb) {
-        userBooks.books.push(bb)
-        userBooks.save()
+      if (user) {
+        const userBooks = await UserBooks.findOne({
+          where: { isBiblio: isBiblio, user: user },
+          relations: ['books'],
+        })
+        const book = await Books.findOne({ isbn: isbn })
+        if (book && userBooks) {
+          userBooks.books.push(book)
+          userBooks.save()
+          return res.status(OK.status).json(successNoJson('userBooks', book))
+        } else {
+          return res.send(`Book or UserBook not found`)
+        }
+      } else {
+        return res.send(`User not found`)
       }
-      console.log(userBooks)
-
-      const books = await UserBooks.find({
-        where: { user: user },
-        relations: ['books'],
-      })
-
-      return res.status(OK.status).json(successNoJson('userBooks', books))
     } catch (errorMessage) {
       Sentry.captureException(errorMessage)
       return res.send(errorMessage)

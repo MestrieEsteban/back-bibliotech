@@ -31,7 +31,7 @@ const users = [
     author: 'Esteban',
     cover: 'test',
     genre: 'test',
-    isbn: '12456',
+    isbn: '12345',
   },
 ]
 

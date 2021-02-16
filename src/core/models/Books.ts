@@ -31,6 +31,9 @@ export default class Books extends BaseEntity {
 
   @Column({ nullable: false })
   genre!: string
+	
+  @Column({ nullable: true })
+  sale!: string
 
   @Column({ nullable: false })
   isbn!: string
