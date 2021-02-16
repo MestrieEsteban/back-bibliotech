@@ -5,6 +5,8 @@ import User from '@/core/models/User'
 import UserBooks from '@/core/models/UserBooks'
 import { Request, Response } from 'express'
 import { isEmpty } from 'lodash'
+import * as Sentry from '@sentry/node'
+
 
 class UsersBooksController {
 	static async getUserBooks(req: Request, res: Response) {
@@ -13,9 +15,7 @@ class UsersBooksController {
 			const missings = fields.filter((field: string) => !req.body[field])
 			if (!isEmpty(missings)) {
 				const isPlural = missings.length > 1
-				console.log('Here');
-
-				throw new Error(`Field${isPlural ? 's' : ''} [ ${missings.join(', ')} ] ${isPlural ? 'are' : 'is'} missing`)
+				return res.send(`Field${isPlural ? 's' : ''} [ ${missings.join(', ')} ] ${isPlural ? 'are' : 'is'} missing`)
 			}
 			const { uuid } = req.body
 
@@ -42,6 +42,7 @@ class UsersBooksController {
 			return res.status(OK.status).json(successNoJson("userBooks", books))
 
 		} catch (errorMessage) {
+			Sentry.captureException(errorMessage);
 			return res.send(errorMessage)
 		}
 
