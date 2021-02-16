@@ -83,12 +83,9 @@ class BooksController {
 					} catch (error) {
 						console.log(error);
 					}
-					
 					const books = await Books.find({ where: { isbn: isbn } })
 					return res.status(OK.status).json(successNoJson('books', books))
 				}
-
-
 				res.send(response)
 			}
 		} catch (errorMessage) {

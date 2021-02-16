@@ -11,12 +11,12 @@ class UsersBooksController {
   static async getUserBooks(req: Request, res: Response) {
     const fields: string[] = ['uuid']
     try {
-      const missings = fields.filter((field: string) => !req.body[field])
+		const missings = fields.filter((field: string) => !req.params[field])
       if (!isEmpty(missings)) {
         const isPlural = missings.length > 1
         return res.send(`Field${isPlural ? 's' : ''} [ ${missings.join(', ')} ] ${isPlural ? 'are' : 'is'} missing`)
       }
-      const { uuid } = req.body
+      const { uuid } = req.params
 
       const user = await User.findOne({ where: { id: uuid } })
 
