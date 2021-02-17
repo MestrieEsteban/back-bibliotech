@@ -61,7 +61,7 @@ class BooksController {
 			if (books.length > 0) {
 				return res.status(OK.status).json(successNoJson('books', books))
 			} else {
-				const apiResponse = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}`)
+				const apiResponse = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${isbn}`)
 				if (apiResponse.data.items) {
 					const bookApi = apiResponse.data.items[0]
 					const bookTitle = bookApi.volumeInfo.title
