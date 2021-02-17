@@ -63,6 +63,59 @@ class UsersBooksController {
 			return res.send(errorMessage)
 		}
 	}
+	static async getUserBooksCount(req: Request, res: Response) {
+		const fields: string[] = ['uuid']
+		try {
+			const missings = fields.filter((field: string) => !req.params[field])
+			if (!isEmpty(missings)) {
+				const isPlural = missings.length > 1
+				return res.send(`Field${isPlural ? 's' : ''} [ ${missings.join(', ')} ] ${isPlural ? 'are' : 'is'} missing`)
+			}
+			const { uuid } = req.params
+
+			const user = await User.findOne({ where: { id: uuid } })
+			if (!user) {
+				return res.send('User not found')
+			}
+
+			const books = await UserBooks.find({
+				where: { user: user, isBiblio: true },
+				relations: ['books'],
+			})
+			console.log(books[0].books.length);
+			
+			return res.status(OK.status).json(successNoJson('userBooksCount', books[0].books.length))
+		} catch (errorMessage) {
+			Sentry.captureException(errorMessage)
+			return res.send(errorMessage)
+		}
+	}
+	static async getUserBooksLast(req: Request, res: Response) {
+		const fields: string[] = ['uuid']
+		try {
+			const missings = fields.filter((field: string) => !req.params[field])
+			if (!isEmpty(missings)) {
+				const isPlural = missings.length > 1
+				return res.send(`Field${isPlural ? 's' : ''} [ ${missings.join(', ')} ] ${isPlural ? 'are' : 'is'} missing`)
+			}
+			const { uuid } = req.params
+
+			const user = await User.findOne({ where: { id: uuid } })
+			if (!user) {
+				return res.send('User not found')
+			}
+
+			const books = await UserBooks.find({
+				where: { user: user, isBiblio: true },
+				relations: ['books'],
+			})
+			const sliceBook = books[0].books.slice(0,9)			
+			return res.status(OK.status).json(successNoJson('userBooksLast', sliceBook))
+		} catch (errorMessage) {
+			Sentry.captureException(errorMessage)
+			return res.send(errorMessage)
+		}
+	}
 }
 
 export default UsersBooksController

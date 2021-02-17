@@ -33,22 +33,10 @@ api.get('/books/search/:isbn', BooksController.getBookByIsbn)
 
 //User book
 api.get('/user/books/:uuid', UsersBooksController.getUserBooks)
+api.get('/user/books/count/:uuid', UsersBooksController.getUserBooksCount)
+api.get('/user/books/last/:uuid', UsersBooksController.getUserBooksLast)
 api.post('/user/books', UsersBooksController.addUserBooks)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-//Secured api
 api.use('/', passport.authenticate('jwt', { session: false }), secured)
 
 export default api
