@@ -5,7 +5,6 @@
 
 import { mlog } from '../libs/utils'
 import User from '../models/User'
-
 const users = [
   {
     nickname: 'Esteban',
@@ -20,6 +19,7 @@ const users = [
 ]
 
 export async function addUser(): Promise<never | void> {
+
   for (const u of users) {
     const user = new User()
 

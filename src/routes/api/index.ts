@@ -25,6 +25,8 @@ api.get('/', (req: Request, res: Response) => {
 //Auth
 api.post('/auth/signup', AuthController.signup)
 api.post('/auth/signin', AuthController.signin)
+api.post('/auth/resetpassword', AuthController.resetPassword)
+api.post('/auth/passwordToken', AuthController.passwordToken)
 
 //Books
 api.get('/books', BooksController.getBooks)

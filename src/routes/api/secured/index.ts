@@ -69,9 +69,6 @@ else{
 }
 })
 
-
-
-
 //User
 api.get('/user/:uuid', UserController.getUser)
 api.put('/user/:uuid', UserController.updateUser)
