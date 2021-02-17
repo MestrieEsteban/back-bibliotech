@@ -55,9 +55,7 @@ class BooksController {
 				const isPlural = missings.length > 1
 				return res.send(`Field${isPlural ? 's' : ''} [ ${missings.join(', ')} ] ${isPlural ? 'are' : 'is'} missing`)
 			}
-			const { isbn } = req.params
-			console.log(isbn);
-			
+			const { isbn } = req.params			
 			const books = await Books.find({ where: { isbn: isbn } })
 
 			if (books.length > 0) {
@@ -65,12 +63,13 @@ class BooksController {
 			} else {
 				const apiResponse = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${isbn}`)
 				if (apiResponse.data.items) {
+					console.log(apiResponse.data.items[0]);
 					const bookApi = apiResponse.data.items[0]
 					const bookTitle = bookApi.volumeInfo.title
 					const bookDescription = bookApi.volumeInfo.description
 					const bookAuthor = bookApi.volumeInfo.authors[0]
 					const bookGenre = bookApi.volumeInfo.categories[0]
-					const bookCover = bookApi.volumeInfo.previewLink
+					const bookCover = bookApi.volumeInfo.imageLinks['thumbnail']
 					const bookSale = bookApi.saleInfo.buyLink
 					const newBook = new Books()
 					try {
@@ -83,7 +82,6 @@ class BooksController {
 						newBook.isbn = isbn
 						await newBook.save()
 					} catch (error) {
-						console.log(error);
 						return res.send(error)
 					}
 					const books = await Books.find({ where: { isbn: isbn } })
