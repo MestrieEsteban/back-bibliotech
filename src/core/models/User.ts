@@ -23,7 +23,7 @@ import UserBooks from './UserBooks'
 export default class User extends BaseEntity {
   private static SALT_ROUND = 8
 
-  @PrimaryGeneratedColumn() //'uuid'
+  @PrimaryGeneratedColumn('uuid') //'uuid'
   id!: string
 
   @Column({ nullable: false })
