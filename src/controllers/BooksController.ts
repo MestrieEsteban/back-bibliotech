@@ -55,6 +55,10 @@ class BooksController {
 							const bookCover = bookApi.volumeInfo.imageLinks ? bookApi.volumeInfo.imageLinks['thumbnail'] : ""
 							const bookSale = bookApi.saleInfo.buyLink
 							const bookIsbn = bookApi.volumeInfo.industryIdentifiers[0].identifier
+							const book = await Books.findOne({ where: { isbn: bookIsbn } })
+							if (book) {
+								return
+							}
 							const newBook = new Books()
 							
 							try {
@@ -73,7 +77,6 @@ class BooksController {
 							}
 						}
 					});					
-					// const books = await Books.find({ where: { isbn: newBook.isbn } })
 					return res.status(OK.status).json(successNoJson('books', allBooks))
 				}
 			}
