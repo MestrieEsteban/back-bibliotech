@@ -21,7 +21,7 @@ resetMail: function(email: string, nickname: string, token:string): void{
           ],
           "Subject": "Modification du mot de pass",
           "TextPart": `${nickname} l'équipe de biblio à modifier motre mot de passe `,
-          "HTMLPart": `<h3>Connexion à <a href='https://bibliotech-serveur.herokuapp.com/${token}'>Biblio</a>!</h3><br />`,
+          "HTMLPart": `<h3>Connexion à <a href='https://bibliotech-serveur.herokuapp.com/passToken/${token}'>Biblio</a>!</h3><br />`,
           "CustomID": "mot de pass user modifier"
         }
       ]
@@ -56,7 +56,7 @@ resetMail: function(email: string, nickname: string, token:string): void{
               ],
               "Subject": "Bienvenue chez Biblio.",
               "TextPart": `${nickname} l'équipe de biblio vous souhaite la bienvenue `,
-              "HTMLPart": "<h3>Connexion à <a href='https://bibliotech-serveur.herokuapp.com/'>Biblio</a>!</h3><br />",
+              "HTMLPart": "<h3>Connexion à <a href='https://bibliotech-serveur.herokuapp.com/passToken'>Biblio</a>!</h3><br />",
               "CustomID": "connect user"
             }
           ]
