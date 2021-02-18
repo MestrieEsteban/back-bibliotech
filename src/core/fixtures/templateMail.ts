@@ -56,7 +56,7 @@ resetMail: function(email: string, nickname: string, token:string): void{
               ],
               "Subject": "Bienvenue chez Biblio.",
               "TextPart": `${nickname} l'équipe de biblio vous souhaite la bienvenue `,
-              "HTMLPart": "<h3>Connexion à <a href='https://bibliotech-front.herokuapp.com/auth/passToken'>Biblio</a>!</h3><br />",
+              "HTMLPart": "<h3>Connexion à <a href='https://bibliotech-front.herokuapp.com/'>Biblio</a>!</h3><br />",
               "CustomID": "connect user"
             }
           ]
