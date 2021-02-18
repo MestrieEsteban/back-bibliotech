@@ -10,6 +10,8 @@ import User from '@/core/models/User'
 import database from '@/core/models/Database'
 import { OK } from '@/core/constants/api'
 import { successNoJson } from '@/core/helpers/response'
+import UsersBooksController from '@/controllers/UsersBooksController'
+import BooksController from '@/controllers/BooksController'
 const multerS3 = require('multer-s3')
 
 AWS.config.update({
@@ -68,6 +70,17 @@ else{
   return res.send('user not found')
 }
 })
+
+//Books
+api.get('/books', BooksController.getBooks)
+api.get('/books/by/:search', BooksController.getBooksBy)
+api.get('/books/search/:isbn', BooksController.getBookByIsbn)
+
+//User book
+api.get('/user/books/:uuid', UsersBooksController.getUserBooks)
+api.get('/user/books/count/:uuid', UsersBooksController.getUserBooksCount)
+api.get('/user/books/last/:uuid', UsersBooksController.getUserBooksLast)
+api.post('/user/books', UsersBooksController.addUserBooks)
 
 //User
 api.get('/user/:uuid', UserController.getUser)

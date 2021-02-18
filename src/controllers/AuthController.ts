@@ -53,7 +53,7 @@ class AuthController {
       return res.send(errorMessage)
     }
   }
-  static async signin(req: Request, res: Response): Promise<Response> {
+  static async signin(req: Request, res: Response): Promise<any> {
     const authenticate = passport.authenticate('local', { session: false }, (errorMessage, user) => {
       if (errorMessage) {
         return res.send(errorMessage)

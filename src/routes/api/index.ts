@@ -28,16 +28,6 @@ api.post('/auth/signin', AuthController.signin)
 api.post('/auth/resetpassword', AuthController.resetPassword)
 api.post('/auth/passwordToken', AuthController.passwordToken)
 
-//Books
-api.get('/books', BooksController.getBooks)
-api.get('/books/by/:search', BooksController.getBooksBy)
-api.get('/books/search/:isbn', BooksController.getBookByIsbn)
-
-//User book
-api.get('/user/books/:uuid', UsersBooksController.getUserBooks)
-api.get('/user/books/count/:uuid', UsersBooksController.getUserBooksCount)
-api.get('/user/books/last/:uuid', UsersBooksController.getUserBooksLast)
-api.post('/user/books', UsersBooksController.addUserBooks)
 
 api.use('/', passport.authenticate('jwt', { session: false }), secured)
 
