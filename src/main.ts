@@ -1,5 +1,4 @@
 import 'reflect-metadata'
-
 import { argv, prelude, mlog } from './core/libs/utils'
 import Server from './Server'
 import dotenv from 'dotenv'
