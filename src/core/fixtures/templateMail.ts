@@ -21,7 +21,7 @@ resetMail: function(email: string, nickname: string, token:string): void{
           ],
           "Subject": "Modification du mot de pass",
           "TextPart": `${nickname} l'équipe de biblio à modifier motre mot de passe `,
-          "HTMLPart": `<h3>Connexion à <a href='https://bibliotech-front.herokuapp.com/auth/passToken/${token}'>Biblio</a>!</h3><br />`,
+          "HTMLPart": `<h3>Connexion à <a href='https://bibliotech-front.herokuapp.com/auth/passToken/?token=${token}'>Biblio</a>!</h3><br />`,
           "CustomID": "mot de pass user modifier"
         }
       ]
