@@ -16,7 +16,7 @@ resetMail: function(email: string, nickname: string, token:string): void{
             {
               "Email": email,
               "Name": nickname,
-              "resettoken": token
+              "resettoken": token,
             }
           ],
           "Subject": "Modification du mot de pass",
