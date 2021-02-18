@@ -1,7 +1,7 @@
 import * as Sentry from '@sentry/node'
 module.exports ={
 
-resetMail: function(email: string, nickname: string, token:string): void{
+resetMail: function(email: string, nickname: string, resetoken:string): void{
     const mailjet = require ('node-mailjet').connect('523e4dc85ff4c09ff652456f98bbb2ad', '5d24fa2476e0dff8104e4f7e0cd77363')
     const request = mailjet
     .post("send", {'version': 'v3.1'})
@@ -16,12 +16,12 @@ resetMail: function(email: string, nickname: string, token:string): void{
             {
               "Email": email,
               "Name": nickname,
-              "token" : token
+              "resetoken" : resetoken
             }
           ],
           "Subject": "Modification du mot de pass",
           "TextPart": `${nickname} l'équipe de biblio à modifier motre mot de passe `,
-          "HTMLPart": `<h3>Connexion à <a href='https://bibliotech-serveur.herokuapp.com/passToken/${token}'>Biblio</a>!</h3><br />`,
+          "HTMLPart": `<h3>Connexion à <a href='https://bibliotech-front.herokuapp.com/auth/passToken/${resetoken}'>Biblio</a>!</h3><br />`,
           "CustomID": "mot de pass user modifier"
         }
       ]
@@ -56,7 +56,7 @@ resetMail: function(email: string, nickname: string, token:string): void{
               ],
               "Subject": "Bienvenue chez Biblio.",
               "TextPart": `${nickname} l'équipe de biblio vous souhaite la bienvenue `,
-              "HTMLPart": "<h3>Connexion à <a href='https://bibliotech-serveur.herokuapp.com/passToken'>Biblio</a>!</h3><br />",
+              "HTMLPart": "<h3>Connexion à <a href='https://bibliotech-front.herokuapp.com/passToken'>Biblio</a>!</h3><br />",
               "CustomID": "connect user"
             }
           ]
