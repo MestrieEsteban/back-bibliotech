@@ -35,7 +35,7 @@ export default class Books extends BaseEntity {
   @Column({ nullable: true })
   sale!: string
 
-  @Column({ nullable: false })
+  @Column({ nullable: false, unique: true })
   isbn!: string
 
   @ManyToMany(() => UserBooks, (userBooks) => userBooks.books)
