@@ -45,8 +45,8 @@ class BooksController {
 				let allBooks: Books[] = []
 				const apiResponse = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${search}`)
 				if (apiResponse.data.items) {
-					await apiResponse.data.items.forEach(async (element: any, index: number = 0) => {
-						if (apiResponse.data.items[index-1]) {
+					apiResponse.data.items.forEach(async (element: any, index: number = 0) => {
+						if (apiResponse.data.items[index - 1]) {
 							const bookApi = apiResponse.data.items[index - 1]
 							const bookTitle = bookApi.volumeInfo.title
 							const bookDescription = bookApi.volumeInfo.description ? bookApi.volumeInfo.description : "No Description"
@@ -55,12 +55,8 @@ class BooksController {
 							const bookCover = bookApi.volumeInfo.imageLinks ? bookApi.volumeInfo.imageLinks['thumbnail'] : ""
 							const bookSale = bookApi.saleInfo.buyLink
 							const bookIsbn = bookApi.volumeInfo.industryIdentifiers[0].identifier
-							const book = await Books.findOne({ where: { isbn: bookIsbn } })
-							if (book) {
-								return
-							}
 							const newBook = new Books()
-							
+
 							try {
 								newBook.title = bookTitle
 								newBook.description = bookDescription
@@ -71,12 +67,13 @@ class BooksController {
 								newBook.isbn = bookIsbn
 								newBook.save()
 								allBooks.push(newBook)
-								
+
 							} catch (error) {
 								return res.send(error)
 							}
 						}
-					});					
+					});
+
 					return res.status(OK.status).json(successNoJson('books', allBooks))
 				}
 			}
